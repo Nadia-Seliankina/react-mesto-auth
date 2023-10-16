@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 0 200px;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 40px 0 66px;
+  row-gap: 50px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width: 1024px) {
+  .content {
+    margin: 41px 0 57px;
+    padding: 0 90px;
+    row-gap: 43px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .content {
+  margin: 42px 0 48px;
+  padding: 0 19px;
+  row-gap: 36px;
+  }
+}

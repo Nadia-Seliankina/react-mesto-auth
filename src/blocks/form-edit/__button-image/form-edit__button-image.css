@@ -1,0 +1,15 @@
+.form-edit__button-image {
+    height: 32px;
+    width: 32px;
+}
+  
+  .form-edit__button-image:hover {
+    opacity: 0.6;
+}
+  
+  @media screen and (max-width: 1024px) {
+      .form-edit__button-image {
+          height: 20px;
+          width: 20px;
+      }
+  }

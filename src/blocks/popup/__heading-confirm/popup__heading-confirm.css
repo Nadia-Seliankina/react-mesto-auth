@@ -1,0 +1,17 @@
+.popup__heading-confirm {
+    margin: 0 0 33px;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.208;
+    color: #000000;
+}
+
+@media screen and (max-width: 1024px) {
+    .popup__heading-confirm {
+        margin: 0 0 55px;
+        font-size: 18px;
+        line-height: 1.22;
+    }
+}

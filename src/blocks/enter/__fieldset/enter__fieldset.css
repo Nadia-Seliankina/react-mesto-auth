@@ -1,0 +1,10 @@
+.enter__fieldset {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+

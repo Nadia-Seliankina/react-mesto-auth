@@ -1,0 +1,22 @@
+.header {
+  margin: 45px 200px 0 200px;
+  padding-bottom: 41px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid #545454;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 142px 1fr;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    margin: 28px 0 0;
+    padding-bottom: 31.6px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .header {
+    margin: 28px 0 0;
+  }
+}

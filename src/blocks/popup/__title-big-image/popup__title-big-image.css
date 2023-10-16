@@ -1,0 +1,12 @@
+.popup__title-big-image {
+    margin: 10px 0 0;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.25;
+    color: #FFFFFF;
+    position: absolute;
+    left: 0;
+    bottom: -22px;
+}

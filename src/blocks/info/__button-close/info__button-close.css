@@ -1,0 +1,15 @@
+.info__button-close {
+    height: 32px;
+    width: 32px;
+    border: none;
+    padding: 0;
+    background-size: contain;
+    background-color: transparent;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+  }
+  
+.info__button-close:hover {
+    cursor: pointer;
+}

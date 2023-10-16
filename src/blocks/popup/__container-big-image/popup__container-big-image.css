@@ -1,0 +1,10 @@
+.popup__container-big-image {
+    grid-template-columns: min-content;
+    grid-template-rows: min-content;
+    display: grid;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}

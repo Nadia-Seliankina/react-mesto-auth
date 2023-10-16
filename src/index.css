@@ -1,0 +1,104 @@
+/* Resources*/
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/fonts.css); 
+
+/* page*/
+@import url(./blocks/page/page.css);
+
+/* header*/
+@import url(./blocks/header/header.css);
+@import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__user/header__user.css);
+@import url(./blocks/header/__container/header__container.css);
+
+/* content*/
+@import url(./blocks/content/content.css);
+
+/* profile*/
+@import url(./blocks/profile/profile.css);
+@import url(./blocks/profile/__avatar/profile__avatar.css);
+@import url(./blocks/profile/__avatar-button/profile__avatar-button.css);
+@import url(./blocks/profile/__info/profile__info.css);
+@import url(./blocks/profile/__add-button/profile__add-button.css);
+@import url(./blocks/profile/__add-button-image/profile__add-button-image.css);
+@import url(./blocks/profile/__edit-button/profile__edit-button.css);
+@import url(./blocks/profile/__edit-button-image/profile__edit-button-image.css);
+@import url(./blocks/profile/__name/profile__name.css);
+@import url(./blocks/profile/__activity/profile__activity.css);
+@import url(./blocks/profile/__text/profile__text.css);
+
+/* elements*/
+@import url(./blocks/elements/elements.css);
+@import url(./blocks/elements/__list/elements__list.css);
+
+/* element */
+@import url(./blocks/element/element.css);
+@import url(./blocks/element/__image/element__image.css);
+@import url(./blocks/element/__image-button/element__image-button.css);
+@import url(./blocks/element/__group/element__group.css);
+@import url(./blocks/element/__title/element__title.css);
+@import url(./blocks/element/__how-like/element__how-like.css);
+@import url(./blocks/element/__button/element__button.css);
+@import url(./blocks/element/__like/element__like.css);
+@import url(./blocks/element/__like/_active/element__like_active.css);
+@import url(./blocks/element/__counter/element__counter.css);
+@import url(./blocks/element/__delete/element__delete.css);
+@import url(./blocks/element/__delete-image/element__delete-image.css);
+
+/* footer*/
+@import url(./blocks/footer/footer.css);
+@import url(./blocks/footer/__text/footer__text.css);
+
+/* popup*/
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/_opened/popup_opened.css);
+@import url(./blocks/popup/__container/popup__container.css);
+@import url(./blocks/popup/__heading/popup__heading.css);
+@import url(./blocks/popup/__heading-confirm/popup__heading-confirm.css);
+@import url(./blocks/popup/__form/popup__form.css);
+@import url(./blocks/popup/__input/popup__input.css);
+@import url(./blocks/popup/__input/_state/popup__input_state_invalid.css);
+@import url(./blocks/popup/__fieldset/popup__fieldset.css);
+@import url(./blocks/popup/__button-save/popup__button-save.css);
+@import url(./blocks/popup/__button-save/popup__button-save_invalid.css);
+@import url(./blocks/popup/__button-confirm/popup__button-confirm.css);
+@import url(./blocks/popup/__button-close/popup__button-close.css);
+@import url(./blocks/popup/__button-image/popup__button-image.css);
+@import url(./blocks/popup/__error/popup__error.css);
+@import url(./blocks/popup/__error/_num/popup__error_num_1.css);
+@import url(./blocks/popup/__error/_num/popup__error_num_2.css);
+
+/* big image*/
+@import url(./blocks/popup/__container-big-image/popup__container-big-image.css);
+@import url(./blocks/popup/__big-photo/popup__big-photo.css);
+@import url(./blocks/popup/__title-big-image/popup__title-big-image.css);
+
+/* enter*/
+@import url(./blocks/enter/enter.css);
+@import url(./blocks/enter/__container/enter__container.css);
+@import url(./blocks/enter/__heading/enter__heading.css);
+@import url(./blocks/enter/__form/enter__form.css);
+@import url(./blocks/enter/__fieldset/enter__fieldset.css);
+@import url(./blocks/enter/__button-save/enter__button-save.css);
+@import url(./blocks/enter/__input/enter__input.css);
+@import url(./blocks/enter/__link/enter__link.css);
+
+/* info*/
+@import url(./blocks/info/info.css);
+@import url(./blocks/info/_opened/info_opened.css);
+@import url(./blocks/info/__container/info__container.css);
+@import url(./blocks/info/__button-close/info__button-close.css);
+@import url(./blocks/info/__button-image/info__button-image.css);
+@import url(./blocks/info/__union/info__union.css);
+@import url(./blocks/info/__text/info__text.css);
+
+/* Основной код для разрешения 1280px */
+/* стили для стандартных компьютеров и ноутбуков */
+
+/*@media screen and (max-width: 1024px) {
+    /* стили для планшетов */
+/*}
+@media screen and (max-width: 544px) {
+    /* стили для мобильных устройств */
+/*}*/

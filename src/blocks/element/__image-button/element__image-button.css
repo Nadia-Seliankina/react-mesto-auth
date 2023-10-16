@@ -1,0 +1,11 @@
+.element__image-button {
+    border: none;
+    padding: 0;
+    background-color: #000000;
+    box-sizing: border-box;
+    object-position: center;
+}
+
+.element__image-button:hover {
+    cursor: pointer;
+}

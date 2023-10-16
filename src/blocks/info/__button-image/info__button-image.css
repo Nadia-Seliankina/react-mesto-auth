@@ -1,0 +1,8 @@
+.info__button-image {
+    height: 32px;
+    width: 32px;
+}
+  
+.info__button-image:hover {
+    opacity: 0.6;
+}

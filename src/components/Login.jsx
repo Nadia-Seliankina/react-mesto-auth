@@ -52,10 +52,11 @@ export default function Login({ onLogin }) {
         console.log(123);
 
         if (email && password) {
-            onLogin({ email, password })
-            //.then(resetForm)
-            //.then(() => navigate("/"))
-            //.catch((err) => console.log(err));
+            onLogin(email, password)
+            .then(() => {
+                resetForm();
+                console.log(456);
+            })
         }
     };
 

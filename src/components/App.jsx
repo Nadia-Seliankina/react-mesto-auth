@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, Fragment } from "react";
 import "../index.css";
 import Header from "./Header";
 import Main from "./Main";
@@ -12,12 +12,18 @@ import avatarImage from "../images/avatar.jpg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/api";
 
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
-import * as apiReact from "../utils/apiReact"
+import * as apiReact from "../utils/apiReact";
 
 function App() {
   // Хук, управляющий состоянием попапа РЕДАКТИРОВАНИЕ ПРОФИЛЯ
@@ -72,7 +78,6 @@ function App() {
   const handleInfoPopupOpen = () => {
     setIsInfoPopupOpen(true);
   };
-
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -177,121 +182,125 @@ function App() {
 
   // ПРОВЕРКА ТОКЕНА
   const auth = (jwt) => {
-    return apiReact.checkToken(jwt)
-      .then((res) => {
-        if (jwt) {
-          setLoggedIn(true);
-          setUserLogged({
-            email: res.email
-          });
-        }
-      })
+    return apiReact.checkToken(jwt).then((res) => {
+      if (jwt) {
+        setLoggedIn(true);
+        //const userData = {
+          //email: res.email
+        //}
+        setUserLogged(res.email);
+      }
+    });
   };
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    auth(jwt);
+    const token = localStorage.getItem('jwt');
+    auth(token);
   }, []);
 
-  
   const handleRegister = ({ email, password }) => {
-    return apiReact.register({ email, password })
-    .then((res) => {
-      if (!res || res.statusCode === 400) throw new Error('Что-то пошло не так');
-      return res;
-    })
-    .then(() => {
-      handleInfoPopupOpen();
-      setIsInfoToolOk(true);
-      navigate("/sign-in", { replace: true });
-    })
-    .catch((err) => console.log(err));
+    return apiReact
+      .register({ email, password })
+      .then((res) => {
+        if (!res || res.statusCode === 400)
+          throw new Error("Что-то пошло не так");
+        return res;
+      })
+      .then(() => {
+        handleInfoPopupOpen();
+        setIsInfoToolOk(true);
+        navigate("/sign-in", { replace: true });
+      })
+      .catch((err) => console.log(err));
   };
 
-  const handleLogin = ({ email, password }) => {
-    setUserLogged(email);
+  const handleLogin = (email, password) => {
+    
     console.log(email, password);
-    return apiReact.authorize({ email, password })
-    .then((res) => {
-      if (!res) throw new Error('Неправильные имя пользователя или пароль');
-      if (res.jwt) {
-        console.log('pamparam pam pam');
-        localStorage.setItem('jwt', res.jwt);
-        setLoggedIn(true);
-        navigate('/', {replace: true});
-      }
-    })
-    .catch((err) => console.log(err));
+    return apiReact
+      .authorize(email, password)
+      .then((res) => {
+        if (!res) throw new Error("Неправильные имя пользователя или пароль");
+        if (res.token) {
+          console.log(res);
+          localStorage.setItem("jwt", res.token);
+          setUserLogged(email);
+          setLoggedIn(true);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   //useEffect(() => {
-    //handleTokenCheck();
+  //handleTokenCheck();
   //}, [loggedIn])
 
   //const handleTokenCheck = () => {
-    // если у пользователя есть токен в localStorage,
-    // эта функция проверит, действующий он или нет
-    //if (localStorage.getItem('jwt')) {
-      //const jwt = localStorage.getItem("jwt");
-      // здесь будем проверять токен
-      //apiReact.checkToken(jwt).then((res) => {    
-        //if (res) {
-        // здесь можем получить данные пользователя
-        //const userLogged = {
-          //email: res.email
-        //}
-          // авторизуем пользователя
-          //setLoggedIn(true);
-          //setUserLogged(userLogged);
-          //navigate("/", { replace: true });
-        //}
-      //});
-    //}
+  // если у пользователя есть токен в localStorage,
+  // эта функция проверит, действующий он или нет
+  //if (localStorage.getItem('jwt')) {
+  //const jwt = localStorage.getItem("jwt");
+  // здесь будем проверять токен
+  //apiReact.checkToken(jwt).then((res) => {
+  //if (res) {
+  // здесь можем получить данные пользователя
+  //const userLogged = {
+  //email: res.email
+  //}
+  // авторизуем пользователя
+  //setLoggedIn(true);
+  //setUserLogged(userLogged);
+  //navigate("/", { replace: true });
+  //}
+  //});
+  //}
   //};
 
   //const handleLogin = () => {
-    //setLoggedIn(true);
+  //setLoggedIn(true);
   //};
 
   const onSignOut = () => {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem("jwt");
     setLoggedIn(false);
-    navigate('/sign-up');
+    navigate("/sign-up");
   };
 
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header isLogged={loggedIn} userLogged={userLogged} onSignOut={onSignOut}/>
+        <Header
+          isLogged={loggedIn}
+          userLogged={userLogged}
+          onSignOut={onSignOut}
+        />
         <Routes>
           <Route
             path="/"
             element={
+              <>
               <ProtectedRoute
-                element={
-                  <>
-                    <Main
-                      onEditProfile={handleEditProfileClick}
-                      onAddPlace={handleAddPlaceClick}
-                      onEditAvatar={handleEditAvatarClick}
-                      onCardClick={handleCardClick}
-                      onCardLike={handleCardLike}
-                      cards={cards}
-                      onCardDelete={handleCardDelete}
-                    />
-                    <Footer />
-                  </>
-                }
+                element={Main}
                 loggedIn={loggedIn}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                cards={cards}
+                onCardDelete={handleCardDelete}
               />
+              <ProtectedRoute element={Footer} loggedIn={loggedIn} />
+              </>
             }
           />
-          <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
           <Route
-            path="/sign-in"
-            element={<Login onLogin={handleLogin} />}
+            path="/sign-up"
+            element={<Register onRegister={handleRegister} />}
           />
-          {/*<Route path="*" element={<Navigate to="/sign-up" replace />} />*/}
+          <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
+          {/*<Route path="*" element={<Navigate to="/sign-up" replace />} /> */}
         </Routes>
         {/* Pop-up Редактировать профиль */}
         <EditProfilePopup

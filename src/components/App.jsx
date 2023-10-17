@@ -193,7 +193,7 @@ function App() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwt');
     auth(token);
   }, []);
 

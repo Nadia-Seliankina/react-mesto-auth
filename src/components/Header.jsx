@@ -10,17 +10,18 @@ export default function Header({ isLogged, userLogged, onSignOut }) {
                 <Routes>
                     <Route path="/sign-up" element={
                         <NavLink className="header__link" to="/sign-in">Войти</NavLink>
-                    }/>
+                    } />
                     <Route path="/sign-in" element={
                         <NavLink className="header__link" to="/sign-up">Регистрация</NavLink>
-                    }/>
+                    } />
+                    <Route path="/" element={isLogged && (
+                        <>
+                            <h2 className="header__user">{userLogged}</h2>
+                            <button className="header__btn" onClick={onSignOut}>Выйти</button>
+                        </>
+                    )} />
                 </Routes>
-                {isLogged && (
-                    <>
-                    <h2 className="header__user">{userLogged}</h2>
-                    <button className="header__btn" onClick={onSignOut}>Выйти</button>
-                    </>
-                )}
+
             </div>
         </header>
     )

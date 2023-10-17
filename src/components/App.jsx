@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, Fragment } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "../index.css";
 import Header from "./Header";
 import Main from "./Main";
@@ -13,7 +13,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/api";
 
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -194,7 +193,7 @@ function App() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('token');
     auth(token);
   }, []);
 

@@ -8,7 +8,7 @@ export default function Header({ isLogged, userLogged, onSignOut }) {
             <img className="header__logo" src={mestoImage} alt="Логотип" />
             <div className="header__container">
                 <Routes>
-                    <Route path="/sign-in" element={
+                    <Route path="/sign-up" element={
                         <NavLink className="header__link" to="/sign-in">Войти</NavLink>
                     }/>
                     <Route path="/sign-in" element={

@@ -132,6 +132,7 @@ function App() {
   };
 
   useEffect(() => {
+    if (loggedIn) {
     api
       .getAllInfo()
       .then(([dataUser, dataCards]) => {
@@ -140,7 +141,7 @@ function App() {
         setCards(dataCards);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }}, [loggedIn]);
 
   const handleAddPlaceSubmit = (card) => {
     //setIsLoading(true);

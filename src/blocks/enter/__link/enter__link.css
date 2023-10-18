@@ -8,3 +8,8 @@
     text-align: center;
     text-decoration: none;
 }
+
+.enter__link:hover {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}

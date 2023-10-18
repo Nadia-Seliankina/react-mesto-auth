@@ -14,3 +14,8 @@
     background-color: transparent;
     align-items: flex-start;
   }
+
+  .header__btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}

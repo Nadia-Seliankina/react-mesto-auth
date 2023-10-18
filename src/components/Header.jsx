@@ -2,7 +2,7 @@ import mestoImage from '../images/Mesto.svg';
 import { NavLink } from 'react-router-dom';
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
-export default function Header({ isLogged, userLogged, onSignOut }) {
+export default function Header({ isLogged, userEmail, onSignOut }) {
     return (
         <header className="header">
             <img className="header__logo" src={mestoImage} alt="Логотип" />
@@ -16,8 +16,9 @@ export default function Header({ isLogged, userLogged, onSignOut }) {
                     } />
                     <Route path="/" element={isLogged && (
                         <>
-                            <h2 className="header__user">{userLogged}</h2>
-                            <button className="header__btn" onClick={onSignOut}>Выйти</button>
+                            <h2 className="header__user">{userEmail}</h2>
+                            {/*<h2 className="header__user">{userLogged.email}</h2>*/}
+                            <button type='button' className="header__btn" onClick={onSignOut}>Выйти</button>
                         </>
                     )} />
                 </Routes>

@@ -56,9 +56,11 @@ function App() {
 
   // Статус пользователя
   const [loggedIn, setLoggedIn] = useState(false);
+  //const loggedInStorage = JSON.parse(localStorage.getItem('loggedIn'));
+  //const [loggedIn, setLoggedIn] = useState(loggedInStorage);
 
   // EMAIL пользователя
-  const [userLogged, setUserLogged] = useState({});
+  const [userEmail, setUserEmail] = useState(null);
 
   const navigate = useNavigate();
 
@@ -181,98 +183,75 @@ function App() {
   );
 
   // ПРОВЕРКА ТОКЕНА
-  const auth = (jwt) => {
-    return apiReact.checkToken(jwt).then((res) => {
-      if (jwt) {
+  const auth = (token) => {
+    return apiReact.checkToken(token).then((res) => {
+      if (token) {
         setLoggedIn(true);
-        //const userData = {
-          //email: res.email
-        //}
-        setUserLogged(res.email);
+        //localStorage.setItem('loggedIn', true)
+        const emailStorage = localStorage.getItem('email');
+        console.log(emailStorage);
+        setUserEmail(emailStorage);
       }
     });
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('token');
     auth(token);
   }, []);
 
   const handleRegister = ({ email, password }) => {
     return apiReact
       .register({ email, password })
-      .then((res) => {
-        if (!res || res.statusCode === 400)
-          throw new Error("Что-то пошло не так");
-        return res;
-      })
+      //.then((res) => {
+        //if (!res || res.statusCode === 400)
+          //throw new Error("Что-то пошло не так");
+        //return res;
+      //})
       .then(() => {
         handleInfoPopupOpen();
         setIsInfoToolOk(true);
         navigate("/sign-in", { replace: true });
       })
-      .catch((err) => console.log(err));
   };
 
   const handleLogin = (email, password) => {
-    
-    console.log(email, password);
+    //console.log(email, password);
     return apiReact
       .authorize(email, password)
       .then((res) => {
-        if (!res) throw new Error("Неправильные имя пользователя или пароль");
+        //if (!res) throw new Error("Неправильные имя пользователя или пароль");
         if (res.token) {
-          console.log(res);
-          localStorage.setItem("jwt", res.token);
-          setUserLogged(email);
+          console.log(res, 'token');
+          localStorage.setItem("token", res.token);
+          setUserEmail(email);
+          //console.log(email);
           setLoggedIn(true);
+          //localStorage.setItem('loggedIn', true)
           navigate("/", { replace: true });
+          localStorage.setItem('email', email);
         }
       })
-      .catch((err) => console.log(err));
   };
-
-  //useEffect(() => {
-  //handleTokenCheck();
-  //}, [loggedIn])
-
-  //const handleTokenCheck = () => {
-  // если у пользователя есть токен в localStorage,
-  // эта функция проверит, действующий он или нет
-  //if (localStorage.getItem('jwt')) {
-  //const jwt = localStorage.getItem("jwt");
-  // здесь будем проверять токен
-  //apiReact.checkToken(jwt).then((res) => {
-  //if (res) {
-  // здесь можем получить данные пользователя
-  //const userLogged = {
-  //email: res.email
-  //}
-  // авторизуем пользователя
-  //setLoggedIn(true);
-  //setUserLogged(userLogged);
-  //navigate("/", { replace: true });
-  //}
-  //});
-  //}
-  //};
-
-  //const handleLogin = () => {
-  //setLoggedIn(true);
-  //};
 
   const onSignOut = () => {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
+    //localStorage.removeItem("email");
     setLoggedIn(false);
+    //localStorage.setItem('loggedIn', false)
     navigate("/sign-up");
   };
+
+  useEffect(() => { 
+    if (loggedIn) navigate('/'); 
+  }, [loggedIn]);
 
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header
           isLogged={loggedIn}
-          userLogged={userLogged}
+          userEmail={userEmail}
           onSignOut={onSignOut}
         />
         <Routes>
@@ -298,9 +277,8 @@ function App() {
           <Route
             path="/sign-up"
             element={<Register onRegister={handleRegister} />}
-          />
+           />
           <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
-          {/*<Route path="*" element={<Navigate to="/sign-up" replace />} /> */}
         </Routes>
         {/* Pop-up Редактировать профиль */}
         <EditProfilePopup

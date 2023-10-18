@@ -69,6 +69,8 @@
 @import url(./blocks/popup/__error/popup__error.css);
 @import url(./blocks/popup/__error/_num/popup__error_num_1.css);
 @import url(./blocks/popup/__error/_num/popup__error_num_2.css);
+@import url(./blocks/popup/__image/popup__image.css);
+@import url(./blocks/popup/__image/_opened/popup__image_opened.css);
 
 /* big image*/
 @import url(./blocks/popup/__container-big-image/popup__container-big-image.css);
@@ -84,6 +86,7 @@
 @import url(./blocks/enter/__button-save/enter__button-save.css);
 @import url(./blocks/enter/__input/enter__input.css);
 @import url(./blocks/enter/__link/enter__link.css);
+@import url(./blocks/enter/__error/enter__error.css);
 
 /* info*/
 @import url(./blocks/info/info.css);

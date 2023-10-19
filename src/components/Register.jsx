@@ -18,8 +18,13 @@ export default function Register({ onRegister }) {
         e.preventDefault();
 
         onRegister({ password, email })
-            .then(resetForm)
-            .catch((err) => setMessage(err.message || "Что-то пошло не так"))
+        .then(() => {
+            resetForm();
+            console.log('onRegister');
+          })
+          .catch((err) => {
+            setMessage(err.message || "Что-то пошло не так")
+          })
     };
 
     return (

@@ -17,15 +17,16 @@ export default function Login({ onLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(123);
 
     if (email && password) {
       onLogin(email, password)
-        .then(() => {
+        .then((res) => {
           resetForm();
-          console.log(456);
+          console.log('onLogin');
         })
-        .catch((err) => setMessage(err.message || "Что-то пошло не так"));
+        .catch((err) => {
+          setMessage(err.message || "Что-то пошло не так")
+        })
     }
   };
 
@@ -57,7 +58,7 @@ export default function Login({ onLogin }) {
               className="enter__input"
               id="inputPassword"
               required
-              minLength="8"
+              minLength="2"
               maxLength="40"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

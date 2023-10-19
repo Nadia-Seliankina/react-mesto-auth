@@ -55,9 +55,9 @@ function App() {
   //const [isLoading, setIsLoading] = useState(false);
 
   // Статус пользователя
-  const [loggedIn, setLoggedIn] = useState(false);
-  //const loggedInStorage = JSON.parse(localStorage.getItem('loggedIn'));
-  //const [loggedIn, setLoggedIn] = useState(loggedInStorage);
+  //const [loggedIn, setLoggedIn] = useState(false);
+  const loggedInStorage = JSON.parse(localStorage.getItem('loggedIn'));
+  const [loggedIn, setLoggedIn] = useState(loggedInStorage);
 
   // EMAIL пользователя
   const [userEmail, setUserEmail] = useState(null);
@@ -183,35 +183,42 @@ function App() {
   );
 
   // ПРОВЕРКА ТОКЕНА
+  const token = localStorage.getItem('token');
+
   const auth = (token) => {
     return apiReact.checkToken(token).then((res) => {
       if (token) {
         setLoggedIn(true);
-        //localStorage.setItem('loggedIn', true)
-        const emailStorage = localStorage.getItem('email');
-        console.log(emailStorage);
-        setUserEmail(emailStorage);
+        localStorage.setItem('loggedIn', true)
       }
     });
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+        const emailStorage = localStorage.getItem('email');
+        console.log(emailStorage);
+        setUserEmail(emailStorage);
+  }, [token]);
+
+  useEffect(() => {
+    //const token = localStorage.getItem('token');
     auth(token);
   }, []);
 
   const handleRegister = ({ email, password }) => {
     return apiReact
       .register({ email, password })
-      //.then((res) => {
-        //if (!res || res.statusCode === 400)
-          //throw new Error("Что-то пошло не так");
-        //return res;
-      //})
-      .then(() => {
+      .then((res) => {
+        if (!res) throw new Error('Ошибка авторизации. Проверьте имя пользователя или пароль');
+        if (res) {
+          handleInfoPopupOpen();
+          setIsInfoToolOk(true);
+          navigate("/sign-in", { replace: true });
+        }
+      })
+      .catch(() => {
         handleInfoPopupOpen();
-        setIsInfoToolOk(true);
-        navigate("/sign-in", { replace: true });
+        setIsInfoToolOk(false);
       })
   };
 
@@ -220,31 +227,34 @@ function App() {
     return apiReact
       .authorize(email, password)
       .then((res) => {
-        //if (!res) throw new Error("Неправильные имя пользователя или пароль");
+        if (!res) throw new Error('Неправильное имя пользователя или пароль');
         if (res.token) {
           console.log(res, 'token');
           localStorage.setItem("token", res.token);
           setUserEmail(email);
-          //console.log(email);
           setLoggedIn(true);
-          //localStorage.setItem('loggedIn', true)
+          localStorage.setItem('loggedIn', true)
           navigate("/", { replace: true });
           localStorage.setItem('email', email);
         }
+      })
+      .catch(() => {
+        handleInfoPopupOpen();
+        setIsInfoToolOk(false);
       })
   };
 
   const onSignOut = () => {
     localStorage.removeItem("token");
-    //localStorage.removeItem("email");
+    localStorage.removeItem("email");
     setLoggedIn(false);
-    //localStorage.setItem('loggedIn', false)
+    localStorage.setItem('loggedIn', false)
     navigate("/sign-up");
   };
 
-  useEffect(() => { 
-    if (loggedIn) navigate('/'); 
-  }, [loggedIn]);
+  //useEffect(() => { 
+    //if (loggedIn) navigate('/'); 
+  //}, [loggedIn]);
 
   return (
     <>
